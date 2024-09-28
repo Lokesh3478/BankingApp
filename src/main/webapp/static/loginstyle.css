@@ -1,0 +1,68 @@
+body {
+    background-image: url('/src/main/resources/templates/img/login-bg.jpg'); /* Replace with your background image URL */
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.login-container {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 100%;
+}
+
+.login-form {
+    background-color: rgba(0, 0, 0, 0.8); /* Slightly transparent black */
+    padding: 45px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    width: 300px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    width: 70%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.btn:hover {
+    background-color: #45a049;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
