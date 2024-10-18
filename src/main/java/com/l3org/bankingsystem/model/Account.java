@@ -2,6 +2,7 @@
 package com.l3org.bankingsystem.model;
 
 import jakarta.persistence.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -18,16 +19,16 @@ public class Account {
     private AccountType accountType;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "userId", nullable = true)
     private User user;
 
     @Embedded
     private AccountInformation accountInformation;
 
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Transactions> sentTransactions;
 
-    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private List<Transactions> receivedTransactions;
 
     @Column(name = "balance", nullable = false)
@@ -35,18 +36,16 @@ public class Account {
 
     @Column(name = "dateOfCreation", nullable = false)
     private Date dateOfCreation;
-
     public Account() {
     }
-
-	public Account(long accountNo, AccountType accountType, User user, AccountInformation accountInformation,
+	public Account(long accountNo, AccountType accountType, User user, String aadharNumber, String mobileNumber, Branch branch,
 			List<Transactions> sentTransactions, List<Transactions> receivedTransactions, double balance,
-			Date dateOfCreation) {
+			Date dateOfCreation,int mpin) {
 		super();
 		this.accountNo = accountNo;
 		this.accountType = accountType;
 		this.user = user;
-		this.accountInformation = accountInformation;
+		this.accountInformation = new AccountInformation(aadharNumber, mobileNumber, branch,mpin);
 		this.sentTransactions = sentTransactions;
 		this.receivedTransactions = receivedTransactions;
 		this.balance = balance;
@@ -115,40 +114,54 @@ public class Account {
 		return dateOfCreation;
 	}
 
-
-
 	public void setDateOfCreation(Date dateOfCreation) {
 		this.dateOfCreation = dateOfCreation;
 	}
 
+	@Override
+	public String toString() {
+		return "Account{" +
+				"accountNo=" + accountNo +
+				", accountType=" + (accountType != null ? accountType : "N/A") +
+				", userId=" + (user != null ? user.getUserId(): "N/A") + // Assuming user has getId() method
+				", balance=" + balance +
+				", dateOfCreation=" + dateOfCreation +
+				'}';
+	}
+
+
 	@Embeddable
     public static class AccountInformation {
-        @Column(name = "aadharNumber", nullable = false)
-        private String aadharNumber;
+        @Column(name = "aadhaarNumber", nullable = false,unique = true)
+        private String aadhaarNumber;
 
-        @Column(name = "mobileNumber", nullable = false)
+        @Column(name = "mobileNumber", nullable = false,unique = true)
         private String mobileNumber;
 
         @ManyToOne
         @JoinColumn(name = "branchIfsc", nullable = false)
         private Branch branch;
 
+		@Column(name = "mpin")
+		private int mpin;
+
         public AccountInformation() {
         }
 
-		public AccountInformation(String aadharNumber, String mobileNumber, Branch branch) {
+		public AccountInformation(String aadhaarNumber, String mobileNumber, Branch branch, int mpin) {
 			super();
-			this.aadharNumber = aadharNumber;
+			this.aadhaarNumber = aadhaarNumber;
 			this.mobileNumber = mobileNumber;
 			this.branch = branch;
+			this.mpin = mpin;
 		}
 
-		public String getAadharNumber() {
-			return aadharNumber;
+		public String getAadhaarNumber() {
+			return aadhaarNumber;
 		}
 
-		public void setAadharNumber(String aadharNumber) {
-			this.aadharNumber = aadharNumber;
+		public void setAadhaarNumber(String aadharNumber) {
+			this.aadhaarNumber = aadharNumber;
 		}
 
 		public String getMobileNumber() {
@@ -166,7 +179,15 @@ public class Account {
 		public void setBranch(Branch branch) {
 			this.branch = branch;
 		}
-        
 
-    }
+		@Override
+		public String toString() {
+			return "AccountInformation{" +
+					"aadhaarNumber='" + aadhaarNumber + '\'' +
+					", mobileNumber='" + mobileNumber + '\'' +
+					", branch=" + branch +
+					", mpin=" + mpin +
+					'}';
+		}
+	}
 }

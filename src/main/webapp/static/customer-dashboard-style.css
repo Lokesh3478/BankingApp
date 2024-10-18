@@ -1,0 +1,73 @@
+/* Sidebar Styles */
+.sidebar {
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #333;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    color: white;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    margin-bottom: 10px;
+    background-color: #444;
+    border-radius: 4px;
+}
+
+.sidebar a:hover {
+    background-color: #555;
+}
+
+/* Main content should respect the sidebar */
+main {
+    margin-left: 220px; /* Leave space for the sidebar */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style for each section */
+.section {
+    display: none; /* Hide by default */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center;
+    height: 100%; /* Ensure the section takes full height */
+    width: 100%; /* Full width */
+}
+
+/* Show only the active section */
+.section.active {
+    display: flex; /* Show the section when active */
+}
+
+/* Button styles */
+.section .button {
+    width: 100%; /* Full width */
+    max-width: 300px; /* Limit button width */
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.section .button:hover {
+    background-color: #45a049;
+}
