@@ -32,12 +32,26 @@ public class AccountType {
     private double overdraftLimit;
 
     @Column(name = "withdrawalLimit", nullable = true)
-    private int withdrawalLimit;
+    private double withdrawalLimit;
 
     @Column(name = "depositLimit", nullable = true)
     private double depositLimit;
 
     @Column(name = "isMinorAccount", nullable = true)
     private boolean isMinorAccount;
+
+    public AccountType(int accountTypeId, String accountTypeName, double interestRate, double minimumBalance, double overdraftLimit, double withdrawalLimit, double depositLimit, boolean isMinorAccount) {
+        this.accountTypeId = accountTypeId;
+        this.accountTypeName = accountTypeName;
+        this.interestRate = interestRate;
+        this.minimumBalance = minimumBalance;
+        this.overdraftLimit = overdraftLimit;
+        this.withdrawalLimit = withdrawalLimit;
+        this.depositLimit = depositLimit;
+        this.isMinorAccount = isMinorAccount;
+    }
+
+    public AccountType() {
+    }
 }
 

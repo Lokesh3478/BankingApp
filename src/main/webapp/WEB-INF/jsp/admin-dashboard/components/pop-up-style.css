@@ -1,0 +1,24 @@
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stays fixed on the screen */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity to overlay the page */
+    z-index: 999; /* Ensure it's on top of other elements */
+}
+
+.modal-content {
+    background-color: #28a745; /* Green background */
+    color: #fff; /* White text */
+    margin: 15% auto; /* Center the modal vertically and horizontally */
+    padding: 20px;
+    border: none; /* Remove border */
+    width: 50%;
+    text-align: center; /* Center the text inside the modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for a pop effect */
+    z-index: 999; /* Ensure it's on top of other elements */
+}
+
+

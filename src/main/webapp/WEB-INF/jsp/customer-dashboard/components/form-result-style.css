@@ -1,0 +1,22 @@
+/* Positioning and Styling for both alerts */
+/* Success Alert Styling (Green) */
+.success-alert {
+    background-color: #28a745; /* Light green */
+    color: #c3e6cb; /* Dark green text */
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    display: none; /* Initially hidden */
+}
+
+/* Error Alert Styling (Red) */
+.error-alert {
+    background-color: red;
+    color: #f5c6cb; /* Light red text */
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    display: none; /* Initially hidden */
+}

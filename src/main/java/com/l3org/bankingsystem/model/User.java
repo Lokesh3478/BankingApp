@@ -5,35 +5,42 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "userType", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "user")
-public class User {
+public abstract class User {
 
-    @Id
-    @Column(name = "userId")
-    private String userId;
+	@Id
+	@Column(name = "userId")
+	private String userId;
 
-    @Column(name = "userName", nullable = false, length = 50)
-    private String userName;
+	@Column(name = "userName", nullable = false, length = 50)
+	private String userName;
 
-    @Embedded
-    private PersonalInformation personalInformation;
+	@Embedded
+	private PersonalInformation personalInformation;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Account> accountList;
+	@Column(name = "dateOfCreation", nullable = false)
+	private Date dateOfCreation;
 
-    public User() {
-    }
+	@Column(name = "status", nullable = false)
+	private String status;
 
-    public User(String userId, String userName, String mailId, String password, String mobileNumber, Date dateOfBirth, Date dateOfCreation, String status, List<Account> accountList) {
-        this.userId = userId;
-        this.userName = userName;
-        this.personalInformation = new PersonalInformation(mailId, password, mobileNumber, dateOfBirth, dateOfCreation, status);
-        this.accountList = accountList;
-    }
-    
-    
+	@Column(name="admin_code",nullable=true)
+	private String adminCode;
 
-    public String getUserId() {
+	public User() {
+	}
+
+	public User(String userId, String userName, String mailId, String password, String mobileNumber, Date dateOfBirth,Date dateOfCreation, String status) {
+		this.userId = userId;
+		this.userName = userName;
+		this.personalInformation = new PersonalInformation(mailId,password,mobileNumber,dateOfBirth);
+		this.dateOfCreation = dateOfCreation;
+		this.status = status;
+	}
+
+	public String getUserId() {
 		return userId;
 	}
 
@@ -57,46 +64,53 @@ public class User {
 		this.personalInformation = personalInformation;
 	}
 
-	public List<Account> getAccountList() {
-		return accountList;
+	public Date getDateOfCreation() {
+		return dateOfCreation;
 	}
 
-	public void setAccountList(List<Account> accountList) {
-		this.accountList = accountList;
+	public void setDateOfCreation(Date dateOfCreation) {
+		this.dateOfCreation = dateOfCreation;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getAdminCode() {
+		return adminCode;
+	}
+
+	public void setAdminCode(String adminCode) {
+		this.adminCode = adminCode;
+	}
 
 	@Embeddable
 	public static class PersonalInformation {
-        @Column(name = "mailId", nullable = false)
-        private String mailId;
+		@Column(name = "mailId", nullable = false, unique = true)
+		private String mailId;
 
-        @Column(name = "password", nullable = false)
-        private String password;
+		@Column(name = "password", nullable = false)
+		private String password;
 
-        @Column(name = "mobileNumber", nullable = false)
-        private String mobileNumber;
+		@Column(name = "mobileNumber", nullable = false , unique = true)
+		private String mobileNumber;
 
-        @Column(name = "dateOfBirth", nullable = false)
-        private Date dateOfBirth;
+		@Column(name = "dateOfBirth", nullable = false)
+		private Date dateOfBirth;
 
-        @Column(name = "dateOfCreation", nullable = false)
-        private Date dateOfCreation;
+		public PersonalInformation() {
+		}
 
-        @Column(name = "status", nullable = false)
-        private String status;
-
-        public PersonalInformation() {
-        }
-
-        public PersonalInformation(String mailId, String password, String mobileNumber, Date dateOfBirth, Date dateOfCreation, String status) {
-            this.mailId = mailId;
-            this.password = password;
-            this.mobileNumber = mobileNumber;
-            this.dateOfBirth = dateOfBirth;
-            this.dateOfCreation = dateOfCreation;
-            this.status = status;
-        }
+		public PersonalInformation(String mailId, String password, String mobileNumber, Date dateOfBirth) {
+			this.mailId = mailId;
+			this.password = password;
+			this.mobileNumber = mobileNumber;
+			this.dateOfBirth = dateOfBirth;
+		}
 
 		public String getMailId() {
 			return mailId;
@@ -130,21 +144,26 @@ public class User {
 			this.dateOfBirth = dateOfBirth;
 		}
 
-		public Date getDateOfCreation() {
-			return dateOfCreation;
+		@Override
+		public String toString() {
+			return "PersonalInformation{" +
+					"mailId='" + mailId + '\'' +
+					", password='" + password + '\'' +
+					", mobileNumber='" + mobileNumber + '\'' +
+					", dateOfBirth=" + dateOfBirth +
+					'}';
 		}
+	}
 
-		public void setDateOfCreation(Date dateOfCreation) {
-			this.dateOfCreation = dateOfCreation;
-		}
-
-		public String getStatus() {
-			return status;
-		}
-
-		public void setStatus(String status) {
-			this.status = status;
-		}
-        
-    }
+	@Override
+	public String toString() {
+		return "User{" +
+				"userId='" + userId + '\'' +
+				", userName='" + userName + '\'' +
+				", personalInformation=" + personalInformation +
+				", dateOfCreation=" + dateOfCreation +
+				", status='" + status + '\'' +
+				", adminCode='" + adminCode + '\'' +
+				'}';
+	}
 }
