@@ -57,6 +57,5 @@
         <input type="submit" value="Submit">
     </form>
 </div>
-<jsp:include page="components/pop-up.jsp" />
 </body>
 </html>
