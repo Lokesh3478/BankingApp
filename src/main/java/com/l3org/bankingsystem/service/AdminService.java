@@ -23,7 +23,7 @@ public class AdminService {
     }
 
     public Account addAccount(long accountNo, int accountTypeId, String userId, String aadhaarNumber, String mobileNumber, String ifscCode, double balance,
-                              Date dateOfCreation, int mpin) throws FieldValueNotFoundException {
+                              Date dateOfCreation, String mpin) throws FieldValueNotFoundException {
         return accountService.addAccount(accountNo,accountTypeId,userId,aadhaarNumber,mobileNumber,ifscCode,balance,dateOfCreation,mpin);
     }
 

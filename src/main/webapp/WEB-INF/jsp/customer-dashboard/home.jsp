@@ -32,7 +32,7 @@
     <section class="section" id="all-pages">
         <h2>All Pages</h2>
         <a href="#" class="button">View Balance</a>
-        <a href="#" class="button">History</a>
+        <a href="#" class="button">Transaction History</a>
         <a href="#" class="button">Send Money</a>
         <a href="${pageContext.request.contextPath}/addAccountForm" class="button">Add Bank A/c or Credit Card</a>
     </section>

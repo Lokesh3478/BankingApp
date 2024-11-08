@@ -45,7 +45,7 @@ public class AdminDashBoardController {
             Model model
     ) {
         try{
-            Account account = adminService.addAccount(accountNo,accountTypeId,userId,aadhaarNumber,mobileNumber,ifscCode,balance,dateOfCreation,0);
+            Account account = adminService.addAccount(accountNo,accountTypeId,userId,aadhaarNumber,mobileNumber,ifscCode,balance,dateOfCreation,"");
             model.addAttribute("account",account);
             model.addAttribute("modalMessage", "Account successfully created!");
         } catch(DuplicateKeyException e){

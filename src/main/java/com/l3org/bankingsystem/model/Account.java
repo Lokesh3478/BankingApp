@@ -39,8 +39,8 @@ public class Account {
     public Account() {
     }
 	public Account(long accountNo, AccountType accountType, User user, String aadharNumber, String mobileNumber, Branch branch,
-			List<Transactions> sentTransactions, List<Transactions> receivedTransactions, double balance,
-			Date dateOfCreation,int mpin) {
+				   List<Transactions> sentTransactions, List<Transactions> receivedTransactions, double balance,
+				   Date dateOfCreation, String mpin) {
 		super();
 		this.accountNo = accountNo;
 		this.accountType = accountType;
@@ -143,12 +143,13 @@ public class Account {
         private Branch branch;
 
 		@Column(name = "mpin")
-		private int mpin;
+		private String mpin;
+
 
         public AccountInformation() {
         }
 
-		public AccountInformation(String aadhaarNumber, String mobileNumber, Branch branch, int mpin) {
+		public AccountInformation(String aadhaarNumber, String mobileNumber, Branch branch, String mpin) {
 			super();
 			this.aadhaarNumber = aadhaarNumber;
 			this.mobileNumber = mobileNumber;
@@ -178,6 +179,14 @@ public class Account {
 
 		public void setBranch(Branch branch) {
 			this.branch = branch;
+		}
+
+		public String getMpin() {
+			return mpin;
+		}
+
+		public void setMpin(String mpin) {
+			this.mpin = mpin;
 		}
 
 		@Override

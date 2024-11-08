@@ -27,8 +27,8 @@ public class AccountService {
         this.branchService = branchService;
     }
 
-    public Account addAccount(long accountNo, int accountTypeId, String userId,String aadhaarNumber, String mobileNumber, String ifscCode,double balance,
-                              Date dateOfCreation,int mpin) throws FieldValueNotFoundException {
+    public Account addAccount(long accountNo, int accountTypeId, String userId, String aadhaarNumber, String mobileNumber, String ifscCode, double balance,
+                              Date dateOfCreation, String mpin) throws FieldValueNotFoundException {
         User user = null;
         try{
             user = loginService.getUser(userId);
@@ -64,5 +64,11 @@ public class AccountService {
             return  accountRepository.findAccountByAccountInformationAadhaarNumber(aadhaarNumber);
         }
         throw new FieldValueNotFoundException("aadhaarNumber");
+    }
+
+    public Account setMpin(String mpin,Account account) {
+        account.getAccountInformation().setMpin(mpin);
+        accountRepository.save(account);
+        return account;
     }
 }
