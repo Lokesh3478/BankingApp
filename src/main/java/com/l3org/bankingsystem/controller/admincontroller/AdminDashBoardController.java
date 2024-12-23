@@ -41,11 +41,12 @@ public class AdminDashBoardController {
             @RequestParam String mobileNumber,
             @RequestParam String ifscCode,
             @RequestParam double balance,
+            @RequestParam double creditLimit,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateOfCreation,
             Model model
     ) {
         try{
-            Account account = adminService.addAccount(accountNo,accountTypeId,userId,aadhaarNumber,mobileNumber,ifscCode,balance,dateOfCreation,"");
+            Account account = adminService.addAccount(accountNo,accountTypeId,userId,aadhaarNumber,mobileNumber,ifscCode,balance,creditLimit,dateOfCreation,"");
             model.addAttribute("account",account);
             model.addAttribute("modalMessage", "Account successfully created!");
         } catch(DuplicateKeyException e){

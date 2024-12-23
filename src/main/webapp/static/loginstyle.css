@@ -1,6 +1,6 @@
 body {
     /*background-image: url('/src/main/resources/templates/img/login-bg.jpg'); !* Replace with your background image URL *!*/
-    background-color: #4CAF50;
+    background-color: cyan;
     background-size: cover;
     display: flex;
     justify-content: center;

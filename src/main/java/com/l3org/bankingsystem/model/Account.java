@@ -34,12 +34,14 @@ public class Account {
     @Column(name = "balance", nullable = false)
     private double balance;
 
+	@Column(name = "credit", nullable = false)
+	private double creditLimit;
     @Column(name = "dateOfCreation", nullable = false)
     private Date dateOfCreation;
     public Account() {
     }
 	public Account(long accountNo, AccountType accountType, User user, String aadharNumber, String mobileNumber, Branch branch,
-				   List<Transactions> sentTransactions, List<Transactions> receivedTransactions, double balance,
+				   List<Transactions> sentTransactions, List<Transactions> receivedTransactions, double balance,double creditLimit,
 				   Date dateOfCreation, String mpin) {
 		super();
 		this.accountNo = accountNo;
@@ -49,6 +51,7 @@ public class Account {
 		this.sentTransactions = sentTransactions;
 		this.receivedTransactions = receivedTransactions;
 		this.balance = balance;
+		this.creditLimit = creditLimit;
 		this.dateOfCreation = dateOfCreation;
 	}
 	public long getAccountNo() {

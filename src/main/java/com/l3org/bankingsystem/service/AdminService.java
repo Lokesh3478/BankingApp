@@ -22,9 +22,9 @@ public class AdminService {
         this.accountService = accountService;
     }
 
-    public Account addAccount(long accountNo, int accountTypeId, String userId, String aadhaarNumber, String mobileNumber, String ifscCode, double balance,
+    public Account addAccount(long accountNo, int accountTypeId, String userId, String aadhaarNumber, String mobileNumber, String ifscCode, double balance,double creditLimit,
                               Date dateOfCreation, String mpin) throws FieldValueNotFoundException {
-        return accountService.addAccount(accountNo,accountTypeId,userId,aadhaarNumber,mobileNumber,ifscCode,balance,dateOfCreation,mpin);
+        return accountService.addAccount(accountNo,accountTypeId,userId,aadhaarNumber,mobileNumber,ifscCode,balance,creditLimit,dateOfCreation,mpin);
     }
 
     public Branch addBranch(String ifscCode, String branchName, String branchAddress){

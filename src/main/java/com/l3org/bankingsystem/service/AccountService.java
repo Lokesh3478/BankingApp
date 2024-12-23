@@ -27,7 +27,7 @@ public class AccountService {
         this.branchService = branchService;
     }
 
-    public Account addAccount(long accountNo, int accountTypeId, String userId, String aadhaarNumber, String mobileNumber, String ifscCode, double balance,
+    public Account addAccount(long accountNo, int accountTypeId, String userId, String aadhaarNumber, String mobileNumber, String ifscCode, double balance,double creditLimit,
                               Date dateOfCreation, String mpin) throws FieldValueNotFoundException {
         User user = null;
         try{
@@ -35,7 +35,7 @@ public class AccountService {
         } catch (FieldValueNotFoundException ignored) {}
         AccountType accountType = accountTypeService.getAccountTypeById(accountTypeId);
         Branch branch = branchService.getBranch(ifscCode);
-        Account account = new Account(accountNo,accountType,user,aadhaarNumber,mobileNumber,branch,new ArrayList<>(),new ArrayList<>(),balance,dateOfCreation,mpin);
+        Account account = new Account(accountNo,accountType,user,aadhaarNumber,mobileNumber,branch,new ArrayList<>(),new ArrayList<>(),balance,creditLimit,dateOfCreation,mpin);
         if(accountRepository.existsById(accountNo)) {
             throw new DuplicateKeyException("accountNo");
         }
@@ -66,9 +66,39 @@ public class AccountService {
         throw new FieldValueNotFoundException("aadhaarNumber");
     }
 
-    public Account setMpin(String mpin,Account account) {
+    public Account setMpin(String mpin,Account account) throws FieldValueNotFoundException {
         account.getAccountInformation().setMpin(mpin);
         accountRepository.save(account);
         return account;
+    }
+    public Account setAadhaarNumber(String aadhaarNumber,Account account) throws FieldValueNotFoundException {
+        account.getAccountInformation().setAadhaarNumber(aadhaarNumber);
+        accountRepository.save(account);
+        return account;
+    }
+    public Account setMobileNumber(String mobileNumber,Account account) throws FieldValueNotFoundException {
+        account.getAccountInformation().setMobileNumber(mobileNumber);
+        accountRepository.save(account);
+        return account;
+    }
+    public Account setBranch(Branch branch,Account account) throws FieldValueNotFoundException {
+        account.getAccountInformation().setBranch(branch);
+        accountRepository.save(account);
+        return account;
+    }
+    public Account editAccountInformation(Account account,String mobileNumber,String aadhaarNumber,Branch branch,String mPin)throws FieldValueNotFoundException{
+        this.setMpin(mPin,account);
+        this.setMobileNumber(mobileNumber,account);
+        this.setAadhaarNumber(aadhaarNumber,account);
+        this.setBranch(branch,account);
+        return accountRepository.save(account);
+    }
+    public Account deposit(double ammount,Account account) throws FieldValueNotFoundException {
+        account.setBalance(account.getBalance()+ammount);
+        return accountRepository.save(account);
+    }
+    public Account withdraw(double ammount,Account account) throws FieldValueNotFoundException {
+        account.setBalance(account.getBalance()-ammount);
+        return accountRepository.save(account);
     }
 }

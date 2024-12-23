@@ -15,8 +15,8 @@
         </ul>
     </nav>
 
-    <h1>Dashboard Home</h1>
-    <p>Welcome to the banking system dashboard!</p>
+    <h1>Finance System > Dashboard Home</h1>
+    <p>Welcome to the Finance System Dashboard!</p>
 
     <div class="form-section">
         <h2>Add Account</h2>

@@ -90,11 +90,11 @@ public class BankingController {
         return "redirect:/customer-dashboard/verify-otp";
     }
     @PostMapping("/customer-dashboard/setMpin")
-    public String setPin(@RequestParam String mpin,Model model){
+    public String setPin(@RequestParam String mpin,Model model) throws FieldValueNotFoundException{
         Account account = (Account) model.getAttribute("account");
         if(mpin.length()==4){
             accountService.setMpin(mpin,account);
-            model.
+            model.addAttribute("otpResult","1234");
             return "redirect:/customer-dashboard/home";
         }
         model.addAttribute("error","Enter a 4 digit mpin");
