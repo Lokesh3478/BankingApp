@@ -100,7 +100,21 @@ public class BankingController {
         model.addAttribute("error","Enter a 4 digit mpin");
         return "redirect:/customer-dashboard/verify-otp";
     }
-
+    @GetMapping("/customer-dashboard/viewBalance")
+    public String getViewBalance(Model model){
+        return "/customer-dashboard/view-balance";
+    }
+    @PostMapping("/customer-dashboard/viewBalance/accountNo/MPIN")
+    public String postViewBalance(@RequestParam String mpin,@RequestParam String accountNo,Model model){
+        Account account = (Account) model.getAttribute("account");
+        if(account.getAccountInformation().getMpin().equals(mpin)){
+            model.addAttribute("balance: ",account.getBalance());
+        }
+        else{
+            model.addAttribute("mpin-error","invalid-mpin");
+        }
+        return "redirect:/customer-dashboard/home";
+    }
 
 
 }
